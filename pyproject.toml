@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "softmaxfix"
+dynamic = ["version"]
+authors = [
+    {name = "Emanuele Ballarin", email = "emanuele@ballarin.cc"}
+]
+description = "Softmax, log-softmax and cross-entropy without Softmax Collapse or Softmax Cancellation (Barron et al., arXiv:2610.31642), for JAX and PyTorch"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.14"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = []
+
+[project.optional-dependencies]
+jax = ["jax>=0.12.0"]
+torch = ["torch>=2.14"]
+test = ["pytest>=9", "mpmath>=1.3", "numpy>=2.5", "ml_dtypes>=0.6", "optax>=0.2.8"]
+
+[project.urls]
+Homepage = "https://github.com/emaballarin/softmaxfix"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/softmaxfix/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/softmaxfix"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "gpu: needs a CUDA device for the framework under test",
+    "slow: slow test (torch.compile)",
+]

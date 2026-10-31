@@ -1,0 +1,37 @@
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+          - id: check-added-large-files
+          - id: check-ast
+          - id: check-case-conflict
+          - id: check-executables-have-shebangs
+          - id: check-merge-conflict
+          - id: check-toml
+          - id: check-xml
+          - id: check-yaml
+          - id: debug-statements
+            language_version: python3
+          - id: end-of-file-fixer
+          - id: mixed-line-ending
+          - id: trailing-whitespace
+    - repo: https://github.com/pre-commit/pygrep-hooks
+      rev: v1.10.0
+      hooks:
+          - id: python-check-blanket-noqa
+          - id: python-use-type-annotations
+#    - repo: https://github.com/astral-sh/ruff-pre-commit
+#      rev: v0.16.5
+#      hooks:
+# ruff.toml is vendored at the repo root, so it is discovered here and in CI
+# alike -- one config, no machine-local path, no drift between the two.
+#          - id: ruff-check
+#            types_or: [python, pyi]
+#            args: [--fix]
+#          - id: ruff-format
+#            types_or: [python, pyi]
+#    - repo: https://github.com/asottile/reorder-python-imports
+#      rev: v3.15.0
+#      hooks:
+#          - id: reorder-python-imports
+#            args: [--py314-plus, --exit-zero-even-if-changed]
